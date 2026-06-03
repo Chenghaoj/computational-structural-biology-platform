@@ -1,6 +1,8 @@
-# Computational Structural Biology Platform
+<p align="center">
+  🇺🇸 English | 🇨🇳 [简体中文](README.zh-CN.md)
+</p>
 
-English (current) | [简体中文](README.zh-CN.md)
+# Computational Structural Biology Platform
 
 A public Codex skill for computational structural biology workflows: structure preparation, docking, molecular dynamics automation, trajectory analysis, and reusable human-in-the-loop research memory.
 
@@ -8,7 +10,7 @@ This repository is a sanitized open-source release. It does not include private 
 
 ## Overview
 
-The Computational Structural Biology Platform helps researchers run safer, more reproducible structural biology workflows with explicit checkpoints for scientific decisions. It emphasizes source-backed rules, careful PDB/mmCIF preparation, validated MD and docking command sequences, and reusable case capture without silently changing scientific inputs.
+Computational Structural Biology Platform helps researchers run safer and more reproducible structural biology workflows with explicit checkpoints for scientific decisions. The project emphasizes source-backed rules, careful PDB/mmCIF preparation, validated MD and docking command sequences, modular software support, and reusable case capture without silently changing scientific inputs.
 
 ## Features
 
@@ -17,32 +19,31 @@ The Computational Structural Biology Platform helps researchers run safer, more 
 - Explicit-water GROMACS pipeline automation
 - AutoDock Vina receptor and ligand preparation helpers
 - Generic MD contact-occupancy analysis
+- Modular software registry under `modules/` and `references/`
 - Human-in-the-loop case registry and exception memory
-- Public-safe documentation and release reports
-- Bilingual documentation with English as the canonical source
+- Public-safe release checks, identity leak validation, and bilingual documentation
 
 ## Current Modules
 
-- AlphaFold3 preparation
-- mmCIF processing
-- PDB standardization
-- Protein docking
-- AutoDock Vina workflows
-- Molecular dynamics
-- GROMACS workflow automation
-- Trajectory analysis
-- Research memory system
-- Human-in-the-loop case management
+- `af3_cif_preparation`
+- `pdb_standardization`
+- `gromacs_stability_md`
+- `vina_screening`
+- `trajectory_analysis`
 
-## Future Modules
+These modules map to current public workflows for AlphaFold3 preparation, mmCIF processing, PDB standardization, AutoDock Vina workflows, molecular dynamics setup, GROMACS workflow automation, trajectory analysis, and reusable research memory.
 
-- Membrane protein MD
-- Ligand-protein MD
-- Ion-specific analysis
-- HADDOCK integration
-- ClusPro integration
-- MM/PBSA
-- DFMD benchmarking
+## Planned Modules
+
+- `haddock3`
+- `smd`
+- `membrane_md`
+- `remd`
+- `ligand_protein_md`
+- `ion_analysis`
+- `mmpbsa`
+
+Planned modules remain inactive until they have documentation, dependency rules, examples, tests, and review.
 
 ## Installation
 
@@ -89,7 +90,7 @@ Check status:
 bash scripts/gromacs/check_pipeline_status.sh
 ```
 
-## Skill Structure
+## Repository Structure
 
 ```text
 SKILL.md                       Codex skill instructions
@@ -104,23 +105,43 @@ examples/                      Generic example configs
 tests/                         Repository validation scripts
 ```
 
-## Examples
+## Module Development
 
-- `examples/gromacs_pipeline.env`: configurable environment variables for an explicit-water MD run
-- `examples/vina_config.example.json`: Vina project configuration template
+New modules should follow the standardized structure in `modules/<module_name>/` and must be registered before they become active. Start with the developer documentation:
 
-## Documentation
-
+- [Contributing](CONTRIBUTING.md)
 - [Developer Guide](docs/DEVELOPER_GUIDE.md)
 - [Module Development Policy](docs/MODULE_DEVELOPMENT_POLICY.md)
-- [Knowledge System Policy](docs/KNOWLEDGE_SYSTEM_POLICY.md)
-- [Translation Policy](docs/TRANSLATION_POLICY.md)
-- [Translation Status](docs/translation_status.md)
 
-## Contribution Guide
+Before release, validate module structure, templates, scripts, identity safety, and public documentation:
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Contributions should be generic, documented, and free of private data or unpublished results.
+```bash
+python3 tests/check_identity_leaks.py
+python3 tests/quick_validate_all.py
+```
+
+## Research Memory System
+
+The research memory system records reusable workflow lessons, exceptions, manual decisions, and validated fixes without publishing private research data. Public entries should use generic examples such as `example_protein_A`, `example_protein_B`, `example_ligand`, `example_dataset`, and `example_project`.
+
+Relevant files include:
+
+- `knowledge/global_case_registry.csv`
+- `knowledge/exceptions/`
+- `knowledge/pending_review/`
+- `docs/KNOWLEDGE_SYSTEM_POLICY.md`
+- `docs/PRIVACY_AND_ANONYMIZATION_POLICY.md`
+
+## Contributing
+
+Contributions are welcome when they are modular, validated, documented, and public-safe. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+
+All public examples and reports must avoid personal names, server names, internal project names, unpublished identifiers, credentials, and machine-specific paths.
+
+## License
+
+See [LICENSE](LICENSE) for repository license information.
 
 ## Disclaimer
 
-This project provides workflow automation and documentation. It does not validate the scientific suitability of a force field, ligand protonation state, membrane composition, docking box, or simulation length for your specific system. Researchers are responsible for reviewing all scientific assumptions and complying with software licenses and data-sharing restrictions.
+This project provides workflow automation and documentation. It does not validate the scientific suitability of a force field, ligand protonation state, membrane composition, docking box, or simulation length for a specific system. Researchers are responsible for reviewing all scientific assumptions and complying with software licenses and data-sharing restrictions.

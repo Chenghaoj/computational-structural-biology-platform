@@ -9,3 +9,4 @@ English (current)
 | Developer Guide | [docs/DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md) | [docs/DEVELOPER_GUIDE.zh-CN.md](DEVELOPER_GUIDE.zh-CN.md) | 2026-06-03 | synced |
 | Module Development Policy | [docs/MODULE_DEVELOPMENT_POLICY.md](MODULE_DEVELOPMENT_POLICY.md) | [docs/MODULE_DEVELOPMENT_POLICY.zh-CN.md](MODULE_DEVELOPMENT_POLICY.zh-CN.md) | 2026-06-03 | synced |
 | Knowledge System Policy | [docs/KNOWLEDGE_SYSTEM_POLICY.md](KNOWLEDGE_SYSTEM_POLICY.md) | [docs/KNOWLEDGE_SYSTEM_POLICY.zh-CN.md](KNOWLEDGE_SYSTEM_POLICY.zh-CN.md) | 2026-06-03 | synced |
+| Privacy And Anonymization Policy | [docs/PRIVACY_AND_ANONYMIZATION_POLICY.md](PRIVACY_AND_ANONYMIZATION_POLICY.md) | not translated | 2026-06-03 | English policy document |

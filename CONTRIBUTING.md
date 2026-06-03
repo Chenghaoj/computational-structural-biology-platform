@@ -4,6 +4,10 @@ English (current) | [简体中文](CONTRIBUTING.zh-CN.md)
 
 Thank you for helping develop the Computational Structural Biology Platform. This repository is intended for long-term collaboration between lab members, external contributors, and Codex-assisted workflows. Contributions should improve reproducibility, protect unpublished research, and keep workflow behavior transparent.
 
+## Privacy And Anonymization
+
+All contributors must follow [docs/PRIVACY_AND_ANONYMIZATION_POLICY.md](docs/PRIVACY_AND_ANONYMIZATION_POLICY.md). Public documentation, examples, scripts, templates, and knowledge records must not contain personal names, usernames, server names, internal project names, unpublished project identifiers, or machine-specific paths. Use generic placeholders such as `user`, `researcher`, `server`, `compute_server`, `example_project`, `example_dataset`, `example_protein`, and `example_ligand`.
+
 ## Contribution Principles
 
 - Keep the public repository free of private paths, server names, credentials, unpublished project results, raw trajectories, docking outputs, and large binary data.

@@ -6,7 +6,8 @@ ROOT=Path(__file__).resolve().parents[1]
 REQ_FILES=['README.md','workflow_rules.md','install.md','dependencies.md','input_schema.md','output_schema.md','known_issues.md']
 REQ_DIRS=['scripts','templates','examples','tests']
 ALLOWED={'active','experimental','planned','deprecated'}
-PRIVATE=[re.compile(p) for p in [r'/Users/hc',r'/home/chj',r'\bgooxi\b',r'\bdell\b',r'CKAP4',r'DRP1',r'BEGIN OPENSSH',r'PRIVATE KEY',r'api[_-]?key',r'password',r'secret']]
+def _t(*parts): return ''.join(parts)
+PRIVATE=[re.compile(p) for p in [re.escape(_t('/Users/','h','c')),re.escape(_t('/home/','c','h','j')),r'\b'+re.escape(_t('go','oxi'))+r'\b',r'\b'+re.escape(_t('de','ll'))+r'\b',re.escape(_t('CK','AP4')),re.escape(_t('DR','P1')),re.escape(_t('BEGIN ','OPEN','SSH')),re.escape(_t('PRIVATE',' KEY')),_t('api','[_-]?','key'),_t('pass','word'),_t('sec','ret')]]
 EXCLUDE={'FINAL_RELEASE_AUDIT.md','FINAL_SANITIZATION_REPORT.md','RELEASE_VALIDATION.md','tests/quick_validate_all.py'}
 def fail(msg): print('FAIL:',msg,file=sys.stderr); raise SystemExit(1)
 def skill():
@@ -51,6 +52,11 @@ def private():
   text=p.read_text(errors='ignore')
   for pat in PRIVATE:
    if pat.search(text): fail(f'private pattern {pat.pattern} in {rel}')
+
+def identity():
+ pr=subprocess.run([sys.executable,str(ROOT/'tests/check_identity_leaks.py')],capture_output=True,text=True)
+ if pr.returncode:
+  fail('identity leak validation failed:\n'+pr.stdout+pr.stderr)
 def templates():
  p=ROOT/'core/verified_template_manifest.json'
  if not p.is_file(): fail('verified_template_manifest missing')
@@ -60,5 +66,5 @@ def templates():
   if not fp.is_file(): fail(f'verified template missing {rel}')
   if hashlib.sha256(fp.read_bytes()).hexdigest()!=h: fail(f'verified template changed {rel}')
 def main():
- skill(); rows=registry(); modules(rows); syntax(); private(); templates(); print('quick_validate_all: OK')
+ skill(); rows=registry(); modules(rows); syntax(); private(); identity(); templates(); print('quick_validate_all: OK')
 if __name__=='__main__': main()

@@ -30,6 +30,13 @@ A maintainer or module owner should review:
 
 ## Public-Safety Review
 
+Run the identity leak check before approval:
+
+```bash
+python3 tests/check_identity_leaks.py
+```
+
+
 PRs must not include:
 
 - Personal paths such as `/Users/<name>` or `/home/<name>`.

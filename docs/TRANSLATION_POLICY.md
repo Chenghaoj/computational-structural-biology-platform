@@ -8,6 +8,22 @@ This repository supports bilingual documentation in English and Simplified Chine
 
 English documents are the canonical source. Simplified Chinese documents are translations and should follow the English structure as closely as practical.
 
+## Homepage Language Switching
+
+The GitHub homepage uses centered language switchers at the top of both README files:
+
+```html
+<p align="center">
+  🇺🇸 English | 🇨🇳 [简体中文](../README.zh-CN.md)
+</p>
+```
+
+```html
+<p align="center">
+  🇺🇸 [English](../README.md) | 🇨🇳 简体中文
+</p>
+```
+
 ## Translation Rules
 
 - Commands must remain identical.
@@ -20,19 +36,7 @@ English documents are the canonical source. Simplified Chinese documents are tra
 
 ## Code Blocks
 
-Do not machine-translate code blocks. Code blocks in translated documents should be copied from the canonical English document unless the block is prose-only and intentionally localized.
-
-## Language Switchers
-
-Every bilingual document should start with a language switcher:
-
-```text
-English (current) | [Simplified Chinese link]
-```
-
-```text
-[English link] | 简体中文（当前）
-```
+Do not translate command blocks or code blocks. Code blocks in translated documents should be copied from the canonical English document unless the block is prose-only and intentionally localized.
 
 ## Synchronization
 
@@ -40,4 +44,4 @@ Update `docs/translation_status.md` whenever English or Chinese documentation ch
 
 ## Review
 
-Translation review should check meaning, command preservation, link validity, and consistency of technical terms. When in doubt, preserve the English technical term.
+Translation review should check meaning, command preservation, link validity, GitHub rendering, and consistency of technical terms. When in doubt, preserve the English technical term.

@@ -4,6 +4,10 @@
 
 感谢你帮助开发 Computational Structural Biology Platform。本仓库面向课题组成员、外部贡献者和 Codex-assisted workflows 的长期协作。贡献应提升可复现性，保护未发表研究，并让工作流行为保持透明。
 
+## 隐私与匿名化
+
+所有贡献者必须遵守 [docs/PRIVACY_AND_ANONYMIZATION_POLICY.md](docs/PRIVACY_AND_ANONYMIZATION_POLICY.md)。公开文档、examples、scripts、templates 和 knowledge records 中不得包含个人姓名、用户名、服务器名、内部项目名、未发表项目标识或机器特异性路径。请使用 `user`、`researcher`、`server`、`compute_server`、`example_project`、`example_dataset`、`example_protein` 和 `example_ligand` 等通用占位符。
+
 ## 贡献原则
 
 - 公开仓库中不得包含私人路径、服务器名称、访问凭据、未发表项目结果、原始轨迹、对接输出或大型二进制数据。
