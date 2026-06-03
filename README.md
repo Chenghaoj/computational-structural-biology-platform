@@ -1,5 +1,7 @@
 # Computational Structural Biology Platform
 
+English (current) | [简体中文](README.zh-CN.md)
+
 A public Codex skill for computational structural biology workflows: structure preparation, docking, molecular dynamics automation, trajectory analysis, and reusable human-in-the-loop research memory.
 
 This repository is a sanitized open-source release. It does not include private project data, raw research outputs, trajectories, docking results, or unpublished scientific conclusions.
@@ -17,6 +19,7 @@ The Computational Structural Biology Platform helps researchers run safer, more 
 - Generic MD contact-occupancy analysis
 - Human-in-the-loop case registry and exception memory
 - Public-safe documentation and release reports
+- Bilingual documentation with English as the canonical source
 
 ## Current Modules
 
@@ -90,13 +93,15 @@ bash scripts/gromacs/check_pipeline_status.sh
 
 ```text
 SKILL.md                       Codex skill instructions
-agents/                        Optional skill metadata
+core/                          Shared development and validation policies
+modules/                       Modular workflow implementations
 scripts/                       Workflow helper scripts
-references/                    Public workflow rules and policies
+references/                    Public workflow rules and registries
 templates/mdp/                 Generic public GROMACS MDP templates
 knowledge/                     Public seed case registry and exception schemas
-docs/                          User and release documentation
+docs/                          User and developer documentation
 examples/                      Generic example configs
+tests/                         Repository validation scripts
 ```
 
 ## Examples
@@ -104,19 +109,18 @@ examples/                      Generic example configs
 - `examples/gromacs_pipeline.env`: configurable environment variables for an explicit-water MD run
 - `examples/vina_config.example.json`: Vina project configuration template
 
+## Documentation
+
+- [Developer Guide](docs/DEVELOPER_GUIDE.md)
+- [Module Development Policy](docs/MODULE_DEVELOPMENT_POLICY.md)
+- [Knowledge System Policy](docs/KNOWLEDGE_SYSTEM_POLICY.md)
+- [Translation Policy](docs/TRANSLATION_POLICY.md)
+- [Translation Status](docs/translation_status.md)
+
 ## Contribution Guide
 
-See `CONTRIBUTING.md`. Contributions should be generic, documented, and free of private data or unpublished results.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Contributions should be generic, documented, and free of private data or unpublished results.
 
 ## Disclaimer
 
 This project provides workflow automation and documentation. It does not validate the scientific suitability of a force field, ligand protonation state, membrane composition, docking box, or simulation length for your specific system. Researchers are responsible for reviewing all scientific assumptions and complying with software licenses and data-sharing restrictions.
-
-## Languages
-
-- English: `README.md`
-- 简体中文: `README.zh-CN.md`
-
-## Multi-Developer Modular Architecture
-
-Modules live under `modules/`, shared policies under `core/`, and quick validation under `tests/quick_validate_all.py`.

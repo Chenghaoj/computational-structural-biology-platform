@@ -1,121 +1,126 @@
 # Computational Structural Biology Platform
 
+[English](README.md) | 简体中文（当前）
+
+Computational Structural Biology Platform 是一个公开的 Codex skill，用于计算结构生物学工作流，包括结构准备、对接、分子动力学自动化、轨迹分析，以及可复用的 human-in-the-loop 研究记忆系统。
+
+本仓库是经过清理的开源发布版本，不包含私人项目数据、原始研究输出、轨迹文件、对接结果或未发表的科学结论。
+
 ## 项目简介
 
-Computational Structural Biology Platform 是一个面向 Codex 的计算结构生物学技能，用于结构准备、分子对接、分子动力学自动化、轨迹分析以及人工审核驱动的经验积累。
+Computational Structural Biology Platform 帮助研究者以更安全、更可复现的方式运行结构生物学工作流，并在关键科学决策处保留人工审核节点。项目强调有来源依据的规则、谨慎的 PDB/mmCIF 准备流程、经过验证的 MD 与 docking 命令序列，以及不会静默改变科学输入的案例积累机制。
 
-## 适用场景
+## 功能特性
 
-- AlphaFold3/mmCIF 输出整理
-- PDB 标准化和拓扑前检查
-- GROMACS 显式水稳定性模拟
-- AutoDock Vina 分子对接和小规模筛选
-- MD 轨迹分析和接触占有率分析
-- 记录可复用的工作流经验和异常案例
+- 通过 `SKILL.md` 提供 Codex skill 入口
+- PDB 与 AlphaFold3/mmCIF 准备辅助工具
+- 显式水 GROMACS pipeline 自动化
+- AutoDock Vina receptor 与 ligand 准备辅助工具
+- 通用 MD contact-occupancy 分析
+- human-in-the-loop case registry 与 exception memory
+- public-safe 文档与 release 报告
+- 双语文档支持，English 作为 canonical source
 
 ## 当前模块
 
-- `af3_cif_preparation`
-- `pdb_standardization`
-- `gromacs_stability_md`
-- `vina_screening`
-- `trajectory_analysis`
+- AlphaFold3 preparation
+- mmCIF processing
+- PDB standardization
+- Protein docking
+- AutoDock Vina workflows
+- Molecular dynamics
+- GROMACS workflow automation
+- Trajectory analysis
+- Research memory system
+- Human-in-the-loop case management
 
 ## 计划模块
 
-- `haddock3`
-- `smd`
-- `membrane_md`
-- `remd`
-- `ligand_protein_md`
-- `ion_analysis`
-- `mmpbsa`
+- Membrane protein MD
+- Ligand-protein MD
+- Ion-specific analysis
+- HADDOCK integration
+- ClusPro integration
+- MM/PBSA
+- DFMD benchmarking
 
 ## 安装方式
 
+克隆仓库：
+
 ```bash
-git clone https://github.com/Chenghaoj/computational-structural-biology-platform.git
+git clone https://github.com/<your-org>/computational-structural-biology-platform.git
 cd computational-structural-biology-platform
+```
+
+通过复制或符号链接的方式安装为 Codex skill：
+
+```bash
 mkdir -p ~/.codex/skills
 ln -s "$PWD" ~/.codex/skills/computational-structural-biology-platform
 ```
 
-第三方软件需要按模块单独安装，例如 GROMACS、MDAnalysis、RDKit、Meeko、AutoDock Vina 等。安装说明见 `references/software_registry.md`。
+根据需要单独安装运行环境：
+
+- GROMACS for MD workflows
+- Python 3.10+
+- MDAnalysis and NumPy for trajectory analysis
+- RDKit, Meeko, and AutoDock Vina Python bindings for docking workflows
 
 ## Codex Skill 使用方式
 
-在 Codex 中调用：
+在 Codex 中使用该 skill：
 
 ```text
 Use $computational-structural-biology-platform to prepare this PDB for explicit-water GROMACS MD.
 ```
 
+配置变量后，可在项目目录中手动运行 GROMACS pipeline：
+
+```bash
+cp scripts/gromacs/run_explicit_water_pipeline.sh ./
+cp -r templates/mdp/verified/gromacs_2025_explicit_water_10ns ./mdp
+INPUT_PDB=protein.pdb GMX_BIN=gmx MDP_DIR=mdp nohup bash run_explicit_water_pipeline.sh > pipeline_console.log 2>&1 & echo $! > pipeline.pid
+```
+
+检查运行状态：
+
+```bash
+bash scripts/gromacs/check_pipeline_status.sh
+```
+
 ## 目录结构
 
 ```text
-core/          多开发者协作、验证、版本和模板策略
-modules/       标准化工作流模块
-references/    全局规则、软件注册表和依赖矩阵
-scripts/       可执行辅助脚本
-templates/     模板文件
-knowledge/     经验记忆和异常登记
-tests/         快速验证脚本
+SKILL.md                       Codex skill instructions
+core/                          Shared development and validation policies
+modules/                       Modular workflow implementations
+scripts/                       Workflow helper scripts
+references/                    Public workflow rules and registries
+templates/mdp/                 Generic public GROMACS MDP templates
+knowledge/                     Public seed case registry and exception schemas
+docs/                          User and developer documentation
+examples/                      Generic example configs
+tests/                         Repository validation scripts
 ```
 
 ## 示例用法
 
-运行 GROMACS 后台流水线前，先检查依赖：
+- `examples/gromacs_pipeline.env`: configurable environment variables for an explicit-water MD run
+- `examples/vina_config.example.json`: Vina project configuration template
 
-```bash
-python3 scripts/environment/check_dependencies.py --module gromacs --strict --output environment_report.md
-```
+## 文档
 
-启动流水线：
+- [Developer Guide](docs/DEVELOPER_GUIDE.zh-CN.md)
+- [Module Development Policy](docs/MODULE_DEVELOPMENT_POLICY.zh-CN.md)
+- [Knowledge System Policy](docs/KNOWLEDGE_SYSTEM_POLICY.zh-CN.md)
+- [Translation Policy](docs/TRANSLATION_POLICY.md)
+- [Translation Status](docs/translation_status.md)
 
-```bash
-INPUT_PDB=protein.pdb MDP_DIR=mdp nohup bash scripts/gromacs/run_explicit_water_pipeline.sh > pipeline_console.log 2>&1 & echo $! > pipeline.pid
-```
+## 贡献指南
 
-## 软件依赖
-
-不同模块依赖不同软件。请查看：
-
-- `references/software_registry.md`
-- `references/software_dependency_matrix.md`
-- `references/software_dependency_rules.md`
-
-缺少依赖时，技能应停止执行，提供官方安装资源，并且不得静默安装软件。
-
-## 如何添加新模块
-
-新模块必须包含：
-
-- `README.md`
-- `workflow_rules.md`
-- `install.md`
-- `dependencies.md`
-- `input_schema.md`
-- `output_schema.md`
-- `known_issues.md`
-- `scripts/`、`templates/`、`examples/`、`tests/`
-
-添加后更新 `references/module_registry.md`、`references/software_registry.md` 和 `references/software_dependency_matrix.md`，并运行：
-
-```bash
-python3 tests/quick_validate_all.py
-```
-
-## 人工审核与经验积累机制
-
-本项目强调 human-in-the-loop：涉及配体化学、金属/辅因子、膜组成、力场参数、离子定义、轨迹分析定义等科学判断时，不能自动修改，必须请求研究者确认。可复用经验记录在 `knowledge/`。
-
-## 注意事项
-
-- 不要提交轨迹、对接结果、PDBQT 输出或未发表科研结果。
-- verified templates 是只读的；修改模板必须新建版本目录。
-- `-maxwarn` 不能默认使用。
-- 计划模块不能执行未验证工作流。
+请阅读 [CONTRIBUTING.zh-CN.md](CONTRIBUTING.zh-CN.md)。贡献内容应当保持通用、文档充分，并且不包含私人数据或未发表结果。
 
 ## 免责声明
 
-本项目提供工作流自动化和工程化规范，不替代科学判断。用户需要自行确认体系、参数、力场、模拟长度、对接盒子和分析定义是否适合具体研究问题。
+本项目提供工作流自动化与文档支持，但不会替研究者判断某个 force field、ligand protonation state、membrane composition、docking box 或 simulation length 是否适合特定体系。研究者需要自行审核所有科学假设，并遵守相关软件许可与数据共享限制。
