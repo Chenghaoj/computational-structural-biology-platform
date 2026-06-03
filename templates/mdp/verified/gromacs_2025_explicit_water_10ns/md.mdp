@@ -1,0 +1,52 @@
+; Annotated template. Parameter values are preserved; comments explain usage.
+; 10 ns production MD template for explicit-solvent protein simulation.
+
+; =========================================================
+; =========================================================
+
+; Run control
+integrator              = md     ; simulation algorithm; steep for minimization, md for leap-frog dynamics
+dt                      = 0.002  ; time step in ps
+nsteps                  = 5000000 ; number of integration/minimization steps
+
+; Output control
+nstxout-compressed      = 50000  ; compressed trajectory (.xtc) output interval in steps
+nstenergy               = 1000   ; energy file output interval in steps
+nstlog                  = 1000   ; log output interval in steps
+nstcalcenergy           = 100    ; energy calculation interval in steps
+
+; Constraints
+constraint_algorithm    = lincs  ; constraint solver; LINCS is standard for proteins
+constraints             = h-bonds ; which bonds are constrained; h-bonds enables stable fs-scale MD steps
+
+; Neighbor searching and cutoffs
+cutoff-scheme           = Verlet ; nonbonded cutoff scheme; Verlet is the current standard
+nstlist                 = 20     ; neighbor-list update interval in steps
+rlist                   = 1.0    ; neighbor-list cutoff radius in nm
+
+; Electrostatics and vdW
+coulombtype             = PME    ; electrostatics method; PME for long-range electrostatics, cutoff for ion pre-processing
+rcoulomb                = 1.0    ; short-range Coulomb cutoff in nm
+
+rvdw                    = 1.0    ; van der Waals cutoff in nm
+
+; Temperature coupling
+tcoupl                  = Nose-Hoover ; temperature coupling algorithm / thermostat
+tc_grps                 = Protein Non-Protein ; temperature-coupling groups
+tau_t                   = 1.0 1.0 ; temperature-coupling time constant(s) in ps
+ref_t                   = 310 310 ; reference temperature(s) in K
+
+; Pressure coupling
+pcoupl                  = Parrinello-Rahman ; pressure coupling algorithm / barostat
+pcoupltype              = isotropic ; pressure-coupling geometry
+tau_p                   = 5.0    ; pressure-coupling time constant in ps
+ref_p                   = 1.0    ; reference pressure in bar
+compressibility         = 4.5e-5 ; isothermal compressibility in 1/bar; 4.5e-5 is water-like
+
+; Center-of-mass control
+comm_mode               = Linear ; center-of-mass motion removal mode
+nstcomm                 = 100    ; COM motion removal interval in steps
+comm_grps               = Protein Non-Protein ; groups for COM motion removal
+
+; Continuation
+continuation            = yes    ; whether constraints and velocities continue from previous run

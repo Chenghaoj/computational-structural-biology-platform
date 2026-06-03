@@ -1,0 +1,26 @@
+; Annotated template. Parameter values are preserved; comments explain usage.
+; Energy minimization template after solvation and ion addition.
+
+; Run control
+integrator      = steep          ; simulation algorithm; steep for minimization, md for leap-frog dynamics
+; integrator	= cg                ; disabled in current template; simulation algorithm; steep for minimization, md for leap-frog dynamics
+
+; Energy minimization
+emtol           = 10.0           ; energy minimization stops when maximum force is below this threshold in kJ/mol/nm
+
+; Run control
+nsteps          = 10000          ; number of integration/minimization steps
+
+; Neighbor searching and cutoffs
+nstlist         = 20             ; neighbor-list update interval in steps
+cutoff-scheme   = Verlet         ; nonbonded cutoff scheme; Verlet is the current standard
+rlist           = 1.0            ; neighbor-list cutoff radius in nm
+
+; Electrostatics and vdW
+coulombtype     = PME            ; electrostatics method; PME for long-range electrostatics, cutoff for ion pre-processing
+rcoulomb        = 1.0            ; short-range Coulomb cutoff in nm
+rvdw		= 1.0                      ; van der Waals cutoff in nm
+
+; Constraints
+constraints	= h-bonds            ; which bonds are constrained; h-bonds enables stable fs-scale MD steps
+constraint_algorithm = LINCS     ; constraint solver; LINCS is standard for proteins

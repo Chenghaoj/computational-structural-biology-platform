@@ -1,0 +1,29 @@
+; Annotated template. Parameter values are preserved; comments explain usage.
+; Minimal parameter file used by grompp before genion.
+
+; Metadata
+title		= Minimization            ; free text title shown in some outputs
+
+; Run control
+integrator      = steep          ; simulation algorithm; steep for minimization, md for leap-frog dynamics
+
+; Energy minimization
+emtol           = 1000.0         ; energy minimization stops when maximum force is below this threshold in kJ/mol/nm
+emstep          = 0.01           ; initial minimization step size in nm
+
+; Run control
+nsteps          = 50000          ; number of integration/minimization steps
+
+; Neighbor searching and cutoffs
+nstlist         = 1              ; neighbor-list update interval in steps
+cutoff-scheme   = Verlet         ; nonbonded cutoff scheme; Verlet is the current standard
+ns_type		= grid                  ; legacy neighbor-search method; grid is spatial grid search
+rlist           = 1.0            ; neighbor-list cutoff radius in nm
+
+; Electrostatics and vdW
+coulombtype     = cutoff         ; electrostatics method; PME for long-range electrostatics, cutoff for ion pre-processing
+rcoulomb        = 1.0            ; short-range Coulomb cutoff in nm
+rvdw            = 1.0            ; van der Waals cutoff in nm
+
+; Periodicity
+pbc             = xyz            ; periodic boundary condition dimensions

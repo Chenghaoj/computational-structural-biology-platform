@@ -1,0 +1,54 @@
+; Annotated template. Parameter values are preserved; comments explain usage.
+; NPT equilibration template with position restraints and pressure coupling.
+
+; Preprocessing
+define                  = -DPOSRES ; preprocessor definitions; -DPOSRES enables position restraints from topology itp files
+
+; Run control
+integrator              = md     ; simulation algorithm; steep for minimization, md for leap-frog dynamics
+dt                      = 0.001  ; time step in ps
+nsteps                  = 1000000 ; number of integration/minimization steps
+
+; Output control
+nstxout-compressed      = 5000   ; compressed trajectory (.xtc) output interval in steps
+nstenergy               = 1000   ; energy file output interval in steps
+nstlog                  = 1000   ; log output interval in steps
+
+; Constraints
+constraint_algorithm    = lincs  ; constraint solver; LINCS is standard for proteins
+constraints             = h-bonds ; which bonds are constrained; h-bonds enables stable fs-scale MD steps
+
+; Neighbor searching and cutoffs
+cutoff-scheme           = Verlet ; nonbonded cutoff scheme; Verlet is the current standard
+nstlist                 = 20     ; neighbor-list update interval in steps
+rlist                   = 1.0    ; neighbor-list cutoff radius in nm
+
+; Electrostatics and vdW
+coulombtype             = PME    ; electrostatics method; PME for long-range electrostatics, cutoff for ion pre-processing
+rcoulomb                = 1.0    ; short-range Coulomb cutoff in nm
+rvdw                    = 1.0    ; van der Waals cutoff in nm
+
+DispCorr                = EnerPres ; long-range dispersion correction for energy and pressure
+
+; Temperature coupling
+tcoupl                  = V-rescale ; temperature coupling algorithm / thermostat
+tc_grps                 = Protein Non-Protein ; temperature-coupling groups
+tau_t                   = 0.2 0.2 ; temperature-coupling time constant(s) in ps
+ref_t                   = 310 310 ; reference temperature(s) in K
+
+; Pressure coupling
+pcoupl                  = C-rescale ; pressure coupling algorithm / barostat
+pcoupltype              = isotropic ; pressure-coupling geometry
+tau_p                   = 2.0    ; pressure-coupling time constant in ps
+ref_p                   = 1.0    ; reference pressure in bar
+compressibility         = 4.5e-5 ; isothermal compressibility in 1/bar; 4.5e-5 is water-like
+
+; Velocity generation
+gen_vel                 = no     ; whether to generate initial velocities
+
+; Center-of-mass control
+comm_mode               = Linear ; center-of-mass motion removal mode
+nstcomm                 = 100    ; COM motion removal interval in steps
+
+; Position restraints
+refcoord_scaling        = com    ; how restraint reference coordinates scale with pressure coupling

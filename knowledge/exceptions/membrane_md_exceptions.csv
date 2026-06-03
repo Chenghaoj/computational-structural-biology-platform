@@ -1,0 +1,1 @@
+exception_id,case_id,module,submodule,pattern,symptom,root_cause,auto_fix_allowed,manual_review_required,approved_fix_or_policy,linked_reference,confidence,last_updated

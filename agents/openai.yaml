@@ -1,0 +1,4 @@
+interface:
+  display_name: "Computational Structural Biology Platform"
+  short_description: "Self-learning structural biology workflows"
+  default_prompt: "Use $computational-structural-biology-platform to prepare structures, run MD or docking, analyze trajectories, and capture reusable research cases."

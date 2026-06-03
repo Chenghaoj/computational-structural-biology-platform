@@ -1,0 +1,33 @@
+{
+  "project_dir": "examples/vina_project",
+  "receptors": [
+    {
+      "name": "example_receptor",
+      "source_pdb": "examples/vina_project/receptors/receptor.pdb",
+      "prepared_pdbqt": "examples/vina_project/receptors/receptor.pdbqt",
+      "results_dir": "examples/vina_project/results/example_receptor",
+      "box": {
+        "center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "size": [
+          24.0,
+          24.0,
+          24.0
+        ]
+      }
+    }
+  ],
+  "ligands": {
+    "source_pdb_dir": "examples/vina_project/ligands_pdb",
+    "sdf_dir": "examples/vina_project/ligands_sdf",
+    "pdbqt_dir": "examples/vina_project/ligands_pdbqt"
+  },
+  "vina": {
+    "exhaustiveness": 8,
+    "num_modes": 9,
+    "seed": 20260603
+  }
+}

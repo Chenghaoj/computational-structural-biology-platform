@@ -1,0 +1,11 @@
+{
+  "algorithm": "sha256",
+  "files": {
+    "templates/mdp/verified/gromacs_2025_explicit_water_10ns/em.mdp": "903e2c3241cb1c31ce1797d0e0dedf092c01d865ccd520225dfd17c292c78ee4",
+    "templates/mdp/verified/gromacs_2025_explicit_water_10ns/ions.mdp": "cac633cfd90fcee4de03362e8b85c1166178b7efd62908fcec2a899714c5e978",
+    "templates/mdp/verified/gromacs_2025_explicit_water_10ns/md.mdp": "f0b20014c72324da78059103fdd055314b07b01023fa7516024592bbd77748f5",
+    "templates/mdp/verified/gromacs_2025_explicit_water_10ns/npt.mdp": "3f31382cdca149093e36af6cd504af163163e78dc35cc95af94bf2efbbbb5347",
+    "templates/mdp/verified/gromacs_2025_explicit_water_10ns/nvt.mdp": "4f053cc36b13955f9f60be410fa8267e8ab92b6c44068b572823c0c1446035b0"
+  },
+  "version": 1
+}
